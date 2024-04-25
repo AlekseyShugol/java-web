@@ -1,6 +1,8 @@
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.InputMismatchException;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
@@ -10,21 +12,25 @@ public class Main {
         System.out.println("Книги:\tЦикл романов \"Тёмная башня\"");
         System.out.println();
 
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM yyyy", new Locale("ru"));
+
         Movie shoushenka = new Movie(
                 "Побег из Шоушенка",
                 "Стивен кинг: \"Побег из Шоушенка (книга)\"",
                 "Фрэнк Дарабонт",
                 "Премия Оскар за лучшую мужскую Роль(1995)",
-                "14 октября 1994" ,
-                "9.1/10 (Кинопоиск)");
+                LocalDate.parse("14 октября 1994", formatter),
+                9.1,
+                "Кинопоиск");
 
         Movie mist = new Movie(
                 "Мгла",
                 "Стивен Кинг \"Туман\"",
                 "Фрэнк Дарабонт",
                 "Лучшее специальное DVD-издание(2009)",
-                "21 ноября 2007",
-                "3/5 (Киного)"
+                LocalDate.parse("21 ноября 2007", formatter),
+                3.0,
+                "Киного"
         );
 
         Movie it = new Movie(
@@ -32,18 +38,25 @@ public class Main {
                 "Стивен кинг\"Оно\"",
                 "Энди Мускетти",
                 "Лучший молодой актёр(2017)",
-                "7 сентября 2017",
-                "7,6/10 (Иви)"
+                LocalDate.parse("7 сентября 2017", formatter),
+                7.6,
+                "IVI"
         );
+        Movie Empty = new Movie("проверка изменяемого списка меню",
+                "",
+                "",
+                "",
+                LocalDate.now(),
+                0.0,
+                "");
 
-        List<Movie> movies = new ArrayList<>();
-        movies.add(shoushenka);
-        movies.add(mist);
-        movies.add(it);
+        List<Movie> movies = List.of(shoushenka, mist, it,Empty);
 
         Scanner sc = new Scanner(System.in);
         while (true){
-            System.out.println("1 - Побег из Шоушенка\n2 - Мгла\n3 - Оно\n Выберите номер фильма что бы посмотреть подробнее\n");
+            for(int i = 0; i<movies.size();i++){
+                System.out.println(i+1 + "-"+movies.get(i).getName());
+            }
             try{
                 int choice = sc.nextInt();
                 System.out.println(movies.get(choice-1).printInfo());
