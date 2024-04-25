@@ -35,7 +35,7 @@ public class Movie {
                 "\33[32mРежиссер:\33[0m\t" + director + "\n" +
                 "\33[32mНоминации:\33[0m\t" + nominations + "\n" +
                 "\33[32mДата премьеры:\33[0m\t" + formattedDate + "\n"+
-                "\33[32mРейтинг:\33[0m\t"+ rateSource +"\n";
+                "\33[32mРейтинг:\33[0m\t"+ rate +"("+rateSource+")\n";
 
     }
 
